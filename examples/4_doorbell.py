@@ -12,7 +12,7 @@ GPIO.setup(touch_pin, GPIO.IN)
 
 try:
     while True:
-        if(GPIO.input(touch_pin) == 1):
+        if GPIO.input(touch_pin) == 1:
             GPIO.output(buzzer_pin, GPIO.HIGH)
             time.sleep(3)
         else:

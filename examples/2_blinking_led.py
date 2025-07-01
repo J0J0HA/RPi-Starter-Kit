@@ -3,7 +3,7 @@
 import RPi.GPIO as GPIO
 import time
 
-led_pin  = 5
+led_pin = 5
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(led_pin, GPIO.OUT)

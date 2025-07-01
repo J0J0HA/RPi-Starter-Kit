@@ -1,5 +1,3 @@
-# doorbell
-
 import RPi.GPIO as GPIO
 import time
 
@@ -14,7 +12,7 @@ GPIO.setup(hall_pin, GPIO.IN)
 
 try:
     while True:
-        if(GPIO.input(hall_pin) == 0):
+        if GPIO.input(hall_pin) == 0:
             GPIO.output(green_pin, GPIO.HIGH)
             GPIO.output(red_pin, GPIO.HIGH)
             time.sleep(0.5)

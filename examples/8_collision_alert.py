@@ -15,7 +15,7 @@ GPIO.setup(led_pin, GPIO.OUT)
 
 try:
     while True:
-        if(GPIO.input(collision_pin) == 0):
+        if GPIO.input(collision_pin) == 0:
             GPIO.output(buzzer_pin, GPIO.HIGH)
             GPIO.output(led_pin, GPIO.HIGH)
             time.sleep(0.5)

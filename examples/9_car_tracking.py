@@ -1,5 +1,3 @@
-# car tracking
-
 import RPi.GPIO as GPIO
 import time
 
@@ -15,7 +13,7 @@ GPIO.setup(red_pin, GPIO.OUT)
 
 try:
     while True:
-        if(GPIO.input(ir_pin) == 1):
+        if GPIO.input(ir_pin) == 1:
             GPIO.output(green_pin, GPIO.HIGH)
             GPIO.output(red_pin, GPIO.LOW)
             print("on track")
