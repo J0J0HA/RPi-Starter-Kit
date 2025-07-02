@@ -1,8 +1,7 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-# Obstacle alert
-import RPi.GPIO as GPIO
 import time
+
+import RPi.GPIO as GPIO
+from keyboard import is_pressed
 
 GPIO.setmode(GPIO.BCM)
 buzzer_pin = 6
@@ -39,12 +38,11 @@ def dis():
     return distance
 
 
-try:
-    while True:
-        distance = dis()
-        if distance < 20:
-            GPIO.output(buzzer_pin, GPIO.HIGH)
-        else:
-            GPIO.output(buzzer_pin, GPIO.LOW)
-except KeyboardInterrupt:
-    GPIO.cleanup()
+while not is_pressed("enter"):
+    distance = dis()
+    if distance < 20:
+        GPIO.output(buzzer_pin, GPIO.HIGH)
+    else:
+        GPIO.output(buzzer_pin, GPIO.LOW)
+
+GPIO.cleanup()

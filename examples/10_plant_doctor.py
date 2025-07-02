@@ -1,5 +1,6 @@
-import spidev
 import RPi.GPIO as GPIO
+import spidev
+from keyboard import is_pressed
 
 GPIO.setmode(GPIO.BCM)
 buzzer_pin = 5
@@ -19,15 +20,13 @@ def readadc(adcnum):
     return adcout
 
 
-try:
-    while True:
-        value = readadc(0)
-        if value < 300:
-            GPIO.output(buzzer_pin, GPIO.HIGH)
-            GPIO.output(led_pin, GPIO.LOW)
-        else:
-            GPIO.output(buzzer_pin, GPIO.LOW)
-            GPIO.output(led_pin, GPIO.HIGH)
+while not is_pressed("enter"):
+    value = readadc(0)
+    if value < 300:
+        GPIO.output(buzzer_pin, GPIO.HIGH)
+        GPIO.output(led_pin, GPIO.LOW)
+    else:
+        GPIO.output(buzzer_pin, GPIO.LOW)
+        GPIO.output(led_pin, GPIO.HIGH)
 
-except KeyboardInterrupt:
-    GPIO.cleanup()
+GPIO.cleanup()

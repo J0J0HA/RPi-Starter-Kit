@@ -1,5 +1,6 @@
-import spidev
 import RPi.GPIO as GPIO
+import spidev
+from keyboard import is_pressed
 
 GPIO.setmode(GPIO.BCM)
 led_pin = 5
@@ -17,13 +18,11 @@ def readadc(adcnum):
     return adcout
 
 
-try:
-    while True:
-        value = readadc(0)
-        if value < 500:
-            GPIO.output(led_pin, GPIO.HIGH)
-        else:
-            GPIO.output(led_pin, GPIO.LOW)
+while not is_pressed("enter"):
+    value = readadc(0)
+    if value < 500:
+        GPIO.output(led_pin, GPIO.HIGH)
+    else:
+        GPIO.output(led_pin, GPIO.LOW)
 
-except KeyboardInterrupt:
-    GPIO.cleanup()
+GPIO.cleanup()

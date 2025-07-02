@@ -1,10 +1,12 @@
 import time
-import RPi.GPIO as GPIO
-import board
-import adafruit_character_lcd.character_lcd_i2c as LCD
 
+import adafruit_character_lcd.character_lcd_i2c as LCD
+import board
+import RPi.GPIO as GPIO
+from keyboard import is_pressed
 
 GPIO.setmode(GPIO.BCM)
+
 
 def dis():
     trig = 15
@@ -38,18 +40,16 @@ def dis():
 lcd_columns = 16
 lcd_rows = 2
 # initialize the I2C address for LCD
-lcd = LCD.Character_LCD_I2C(board.I2C(), lcd_columns, lcd_rows, address=0x20) #LCD.Adafruit_CharLCDBackpack(address=0x20)
+lcd = LCD.Character_LCD_I2C(board.I2C(), lcd_columns, lcd_rows, address=0x20)
 
 # turn backlight on
 lcd.backlight = True
 
-try:
-    while True:
-        lcd.message = "{0:0.2f}cm".format(dis())
-        time.sleep(1)
-        lcd.clear()
-
-except KeyboardInterrupt:
+while not is_pressed("enter"):
+    lcd.message = "{0:0.2f}cm".format(dis())
+    time.sleep(1)
     lcd.clear()
-    lcd.backlight = False
-    GPIO.cleanup()
+
+lcd.clear()
+lcd.backlight = False
+GPIO.cleanup()

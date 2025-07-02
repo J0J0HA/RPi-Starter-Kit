@@ -1,6 +1,8 @@
-import spidev
 import time
+
 import RPi.GPIO as GPIO
+import spidev
+from keyboard import is_pressed
 
 GPIO.setmode(GPIO.BCM)
 led_pin = 12
@@ -24,11 +26,10 @@ def brightness_func(x):
     return x / 4 / 2.56
 
 
-try:
-    while True:
-        value = readadc(0)
-        brightness = brightness_func(value)
-        pwm.ChangeDutyCycle(brightness)
-        time.sleep(0.1)
-except KeyboardInterrupt:
-    GPIO.cleanup()
+while not is_pressed("enter"):
+    value = readadc(0)
+    brightness = brightness_func(value)
+    pwm.ChangeDutyCycle(brightness)
+    time.sleep(0.1)
+
+GPIO.cleanup()

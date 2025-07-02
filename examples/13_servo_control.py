@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-# Servo control
 # author: Tony
 # http://elecrow.com/
 
@@ -26,7 +23,7 @@ def setup():
     pwm.start(2.5)
 
 
-def setDirection(direction):
+def set_direction(direction):
     duty = (direction + a) / b
     pwm.ChangeDutyCycle(duty)
     print("direction =", direction, "-> duty =", duty)
@@ -36,7 +33,7 @@ def setDirection(direction):
 print("starting")
 setup()
 for direction in range(0, 181, 90):
-    setDirection(direction)
-setDirection(0)
+    set_direction(direction)
+set_direction(0)
 GPIO.cleanup()
 print("done")

@@ -2,10 +2,20 @@
 # -*- coding: utf-8 -*-
 # http://elecrow.com/
 
-import RPi.GPIO as GPIO
-import time
-import socket, signal
+
+
+# echo "dtoverlay=gpio-ir,gpio_pin=12" > /boot/firmware/config.txt
+# sudo apt-get install ir-keytable
+# sudo ir-keytable -p all
+# pip3 install evdev --break-system-packages
+# sudo apt-get install evtest
+
+import signal
+import socket
+from array import array
+
 import lirc
+import RPi.GPIO as GPIO
 
 # define relay pin
 servo_pin = 12
@@ -25,7 +35,7 @@ def setup():
 def setDirection(direction):
     duty = (direction +a)/b
     pwm.ChangeDutyCycle(duty)
-    print "direction =", direction, "-> duty =", duty
+    print("direction =", direction, "-> duty =", duty)
    
 
 
@@ -37,9 +47,9 @@ Socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 Lirc = lirc.init("keys")
 
 def handler(signal, frame):
-	Socket.close()
-	GPIO.cleanup()
-	exit(0)
+    Socket.close()
+    GPIO.cleanup()
+    exit(0)
 
 signal.signal(signal.SIGTSTP, handler)
 
