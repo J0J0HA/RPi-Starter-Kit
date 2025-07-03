@@ -1,13 +1,14 @@
-# IR Remote Codes
+# IR Remote
+
+## Setup
+
+1. Füge `ir-keytable -p all` ans Ende der Datei `/etc/rc.local` an.
+2. Füge `dtoverlay=gpio-ir,gpio_pin=12` ans Ende der Datei `/boot/firmware/config.txt`
+3. Führe `sh install-ir.sh` aus
 
 
-# echo "dtoverlay=gpio-ir,gpio_pin=12" > /boot/firmware/config.txt
-# sudo apt-get install ir-keytable
-# sudo ir-keytable -p all
-# pip3 install evdev --break-system-packages
-# sudo apt-get install evtest
-# echo "ir-keytable -p all" > /etc/rc.local
 
+## IR Codes
 
 | Button | Code |
 | ------ | ---- |
@@ -32,3 +33,5 @@
 | 7      | 66   |
 | 8      | 82   |
 | 9      | 74   |
+
+[Quelle](https://ignorantofthings.com/receiving-infrared-on-the-raspberry-pi-with-python/)
