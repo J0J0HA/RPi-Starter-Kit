@@ -6,8 +6,6 @@
 2. Füge `dtoverlay=gpio-ir,gpio_pin=12` ans Ende der Datei `/boot/firmware/config.txt`
 3. Führe `sh install-ir.sh` aus
 
-
-
 ## IR Codes
 
 | Button | Code |
