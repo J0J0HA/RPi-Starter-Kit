@@ -14,7 +14,8 @@ while not is_pressed("enter"):
     if GPIO.input(touch_pin):
         GPIO.output(buzzer_pin, GPIO.HIGH)
         time.sleep(3)
-    else:
+        # TODO: Check if this works as desired
+        # Might beep from initialisation until touch detection.
         GPIO.output(buzzer_pin, GPIO.LOW)
 
 GPIO.cleanup()
